@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
@@ -22,6 +23,17 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // currentUserがnilならログインしていない
+        if Auth.auth().currentUser == nil {
+            // 未ログイン時の処理
+            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login") else {return}
+            self.present(loginViewController, animated: true, completion: nil)
+        }
+    }
+    
     
     /// タブバーが押された時に呼ばれるデリゲートメソッド(true: タブ切り替えを行う, false: タブ切り替えを行わない)
     /// - Parameter tabBarConroller: UITabBarController
@@ -29,8 +41,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarConroller: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController is ImageSelectViewController {
             // ImageSelectViewControllerはタブ画面ではなくモーダル画面に移動する
-            let imageViewController = storyboard!.instantiateViewController(withIdentifier: "ImageSelect")  //storyboardのimageViewControllerを読み込む
-            present(imageViewController, animated: true)    //モーダル画面に移動
+            if let imageViewController = storyboard?.instantiateViewController(withIdentifier: "ImageSelect") {
+                present(imageViewController, animated: true)    //モーダル画面に移動
+            } //storyboardのimageViewControllerを読み込む
             return false
         } else {
             // その他のViewControllerはタブ切り替え
