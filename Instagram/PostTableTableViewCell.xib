@@ -57,7 +57,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aj7-t6-TIm">
                         <rect key="frame" x="30" y="392" width="291" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="fnk-Mx-4xE"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="fnk-Mx-4xE"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>

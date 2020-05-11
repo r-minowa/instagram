@@ -25,10 +25,13 @@ class CommentViewController: UIViewController { //継承するのは使いたい
         guard let postData = self.postData else {return}
         if let commentName = Auth.auth().currentUser?.displayName, let commentData = commentTextField.text {
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)    //場所の指定
+            
+            let comment = "\(commentName) : \(commentData)"
+            var updateValue_commentData: FieldValue
+            updateValue_commentData = FieldValue.arrayUnion([comment])
             // データの追加更新
             postRef.updateData([
-                "comment": commentData,
-                "commentName": commentName
+                "comment": updateValue_commentData
             ])
         }
 
