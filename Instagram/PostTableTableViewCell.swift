@@ -45,18 +45,10 @@ class PostTableTableViewCell: UITableViewCell {
             self.captionLabel.text = "\(caption_name) : \(caption_caption)"
         }
         
-//        // commentの表示
-//        self.commentLabel.text = ""
-//        if let comment_name = postData.commentName, let comment_comment = postData.comment {
-//            self.commentLabel.text = "\(comment_name) : \(comment_comment)"
-//        }
-        
         // commentの表示
         self.commentLabel.text = ""
-//        let comment_name: [String] = postData.commentName
         let comment_comment: [String] = postData.comment
         var comment = ""
-        commentLabel.numberOfLines = comment_comment.count + 1
         for count in 0 ..< comment_comment.count {
             comment += "\(comment_comment[count]) \n"
         }
